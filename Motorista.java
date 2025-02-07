@@ -1,57 +1,79 @@
-import java.io.DataInput;
 import java.io.Serializable;
 import java.util.Date;
 public class Motorista implements Serializable{
-    private String nome = new String();
-    private int idade;
-    private int cnh;
+    private String nome = new String(); // deixaria só string nome?
+    private int idade, cnh, porcenCom;
+    private double salFixo;
     private Date dataAdm = new Date();
     private Date dataDem = new Date();
+    private Caminhao caminhao = new Caminhao();
+    private String senhaMotorista = new String();
 
     // Construtor
-    public Motorista(String nome, int idade, int cnh) {
+    public Motorista(String nome, int idade, int cnh, Date dataAdm, Date dataDem, //como colocar para nao ser obrigatorio
+    Caminhao placa, int porcenCom, double salFixo, String senhaMotorista) {
         this.nome = nome;
         this.idade = idade;
         this.cnh = cnh;
+        this.dataAdm = dataAdm;
+        this.dataDem = dataDem;
+        this.caminhao.placa = placa; //????
+        this.porcenCom = porcenCom;
+        this.salFixo = salFixo;
+        this.senhaMotorista = senhaMotorista;
     }
 
-    public String getNome() {// Função para pegar o nome dos respectivos jogadores.
+    public String getNome() {// Função para pegar o nome do motorista.
         return this.nome;
     }
 
-    public int getIdade() {// Função para pegar o tipo dos respectivos jogadores.
+    public int getIdade() {// Função para pegar a idade do motorista.
         return this.idade;
     }
 
-    public int getCnh() {// Função para pegar o tipo dos respectivos jogadores.
+    public int getCnh() {// Função para pegar a CNH do motorista.
         return this.cnh;
     }
 
-    public int getJogoGeneral(int i) { // Função para pegar as jogadas da "ficha" dos respectivos jogadores.
-        return this.jogoGeneral.getJogadas(i);
+    public Date getDataAdm() {// Função para pegar a data de admissão do motorista.
+        return this.dataAdm;
     }
 
-    public JogoGeneral getJogo() { //para acessar por outra classe o jogo de cada jogador
-        return this.jogoGeneral;
+    public Date getDataDem() {// Função para pegar a data de demissao do motorista.
+        return this.dataDem;
     }
 
-    public void dell(){ //deleta os dados do jogador
-        this.nome=null;
-        this.tipoJogador=null;
-        this.jogoGeneral=null;
+    public String getPlacaCam() {// Função para pegar a placa do caminhao que o motorista trabalha
+        return this.placa;//?????
     }
 
-    public void mostrarJogadasExecutadas() {
-        // Jogadas já feitas
-		for (int i = 0 ; i < 13 ; i++) { 
-			if(this.jogoGeneral.getJogadas(i) !=-1) {
-				System.out.printf("%d\t", this.jogoGeneral.getJogadas(i)); 
-			} 
-            else if(this.jogoGeneral.getJogadas(i) ==-1) {
-				System.out.print("-\t");
-			}
-		}
-		System.out.println("");
+    public int getPorcenCom() {// Função para pegar a porcentagem de comissão do motorista.
+        return this.porcenCom;
     }
+
+    public double getSalFixo() {// Função para pegar o salário fixo do motorista.
+        return this.salFixo;
+    }
+
+    public String getSenhaMotorista() {// Função para pegar a senha do motorista.
+        return this.senhaMotorista;
+    }
+
+    public void setDataDem(Date novaDem) {//Função que vai definir a data de demissão do motorista
+        dataDem = novaDem;
+    }
+
+    public void registrarViagem(){
+
+    }
+    
+    public void registrarDespesas(){
+        
+    }
+
+    public void gerarHolerite(){
+        
+    }
+
 
 }
