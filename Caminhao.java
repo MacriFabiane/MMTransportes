@@ -4,9 +4,8 @@ public class Caminhao implements Serializable{
     private String chassi = new String();
     private boolean emUso;
    
-
     // Construtor
-    public Caminhao(String placa, String chassi, Boolean emUso) {
+    public Caminhao(String placa, String chassi, Boolean emUso) { //teria que ser assim msm????
         this.placa = placa;
         this.chassi = chassi;
         this.emUso = emUso;
@@ -24,35 +23,8 @@ public class Caminhao implements Serializable{
         return this.emUso;
     }
 
-    public void setEmUso(boolean x) {//vai colocar a pontuação das jogadas
+    public void setEmUso(boolean x) {//vai definir se o caminhão está em uso ou não
         emUso = x;
-    }
-
-    public int getJogoGeneral(int i) { // Função para pegar as jogadas da "ficha" dos respectivos jogadores.
-        return this.jogoGeneral.getJogadas(i);
-    }
-
-    public JogoGeneral getJogo() { //para acessar por outra classe o jogo de cada jogador
-        return this.jogoGeneral;
-    }
-
-    public void dell(){ //deleta os dados do jogador
-        this.nome=null;
-        this.tipoJogador=null;
-        this.jogoGeneral=null;
-    }
-
-    public void mostrarJogadasExecutadas() {
-        // Jogadas já feitas
-		for (int i = 0 ; i < 13 ; i++) { 
-			if(this.jogoGeneral.getJogadas(i) !=-1) {
-				System.out.printf("%d\t", this.jogoGeneral.getJogadas(i)); 
-			} 
-            else if(this.jogoGeneral.getJogadas(i) ==-1) {
-				System.out.print("-\t");
-			}
-		}
-		System.out.println("");
     }
 
 }
