@@ -17,7 +17,7 @@ public class Motorista implements Serializable{
         this.cnh = cnh;
         this.dataAdm = dataAdm;
         this.dataDem = dataDem;
-        this.caminhao.placa = placa; //????
+        this.caminhao.placa = placa; //???? //acho que na entrada de dados placa n é caminhão mas sim string e agui dai usa this placa e tem que fazer algo pro sistema pegar a de unm caminhaõ q n tá em uso
         this.porcenCom = porcenCom;
         this.salFixo = salFixo;
         this.senhaMotorista = senhaMotorista;

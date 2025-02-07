@@ -1,3 +1,4 @@
+import java.util.Date;
 import java.util.Scanner;
 import java.io.Serializable;
 import java.time.LocalDate;
@@ -6,34 +7,58 @@ public class Gerencia implements Serializable {
 
     private LocalDate hoje = LocalDate.now();
     private int mesAtual = hoje.getMonthValue();
-    private Motorista[] motorista;
+    private Motorista[] motoristas;
     private int n = 20; //suporta só até 20 motoristas
-    private float somaSalarios = 0;
+    private double somaSalarios = 0;
 
     //Construtor
     public Gerencia() {
         this.n = 20;
-        this.motoristas = new Motrista[n];
+        this.motoristas = new Motorista[n];
+        //fazer um vetor de caminhão
 
-        for (int i=0; i<motoristas.lenth; i++){
+        for (int i=0; i<motoristas.length; i++){
             motoristas[i] = null; //define cada elemento como nulo
         }
     }
 
-    public registrarMotorista(nome, CNH, dataAdm, dataDem, placa, comissao, salario, senha){
+    public void registrarMotorista(){ //exemplo em campeonato
+        //logica para checkar o caminhão q não tá em uso e definir a placa
+    }
+
+    public void registrarcaminhao(){
 
     }
 
-    public gerarListaMotoristaSalario(){
-
+    public String gerarListaMotoristaSalario(){
+        //vai precisar chamar o soma salarios aqui
     }
 
-    public calcularTotalSalarios(){
+    public double calcularTotalSalarios(){
         
-        for (int i=0; i<motoristas.lenth; i++){
-           somaSalarios = motoristas[i].salario;
+        for (int i=0; i<motoristas.length; i++){
+
+            if(motoristas[i] != null)//se o motorista existir
+                somaSalarios += motoristas[i].getSalFixo();
+
         }
 
+        return  somaSalarios;
+    }
+
+    public String gerearRelatorioLeDTotais(){ //gera relatorio de lucros e despesas totais do mes
+        //vai chamar aui somar lucros e somar desesas e o diflucdes
     }
     
+    public double somarLucros(){
+        
+    }
+
+    public double somarDespesas(){
+
+    }
+
+    public double calcularDifLucDes(){
+        //chamar soma des e soma luc aqui
+    }
 }
