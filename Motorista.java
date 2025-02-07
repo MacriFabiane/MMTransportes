@@ -1,26 +1,41 @@
 import java.io.Serializable;
 import java.util.Date;
+import java.util.Scanner;
 public class Motorista implements Serializable{
     private String nome = new String(); // deixaria só string nome?
     private int idade, cnh, porcenCom;
     private double salFixo;
     private Date dataAdm = new Date();
     private Date dataDem = new Date();
-    private Caminhao caminhao = new Caminhao();
     private String senhaMotorista = new String();
+    private Caminhao[] caminhao;
+    private String placa = new String();
+    private String origem;
 
     // Construtor
-    public Motorista(String nome, int idade, int cnh, Date dataAdm, Date dataDem, //como colocar para nao ser obrigatorio
-    Caminhao placa, int porcenCom, double salFixo, String senhaMotorista) {
+    public Motorista(String nome, int idade, int cnh, Date dataAdm, Date dataDem, 
+    int porcenCom, double salFixo, String senhaMotorista) {
         this.nome = nome;
         this.idade = idade;
         this.cnh = cnh;
         this.dataAdm = dataAdm;
         this.dataDem = dataDem;
-        this.caminhao.placa = placa; //????
         this.porcenCom = porcenCom;
         this.salFixo = salFixo;
         this.senhaMotorista = senhaMotorista;
+        for(int i=0; i<caminhao.length;i++){
+            if(caminhao[i].getEmUso() == false){
+                this.placa = caminhao[i].getPlaca();
+                caminhao[i].setEmUso(true);
+                break;
+            }
+            System.out.println("Não é possível adicionar novo motorista, pois todos os caminhões estão em uso!");
+        }
+    }
+
+    public Motorista(String nome, int idade, int cnh, Date dataAdm, 
+    int porcenCom, double salFixo, String senhaMotorista){
+        this(nome, idade, cnh, dataAdm, null, porcenCom, salFixo, senhaMotorista);
     }
 
     public String getNome() {// Função para pegar o nome do motorista.
@@ -43,8 +58,8 @@ public class Motorista implements Serializable{
         return this.dataDem;
     }
 
-    public String getPlacaCam() {// Função para pegar a placa do caminhao que o motorista trabalha
-        return this.placa;//?????
+    public String getPlacaMot() {// Função para pegar a placa do caminhao que o motorista trabalha
+        return this.placa;
     }
 
     public int getPorcenCom() {// Função para pegar a porcentagem de comissão do motorista.
@@ -64,16 +79,18 @@ public class Motorista implements Serializable{
     }
 
     public void registrarViagem(){
+        Scanner teclado= new Scanner(System.in);
 
+        System.out.println("Origem: ");
+        origem = teclado.nextLine();
     }
     
     public void registrarDespesas(){
-        
+        Scanner teclado= new Scanner(System.in);
     }
 
     public void gerarHolerite(){
         
     }
-
 
 }
