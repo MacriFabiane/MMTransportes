@@ -26,5 +26,4 @@ public class Caminhao implements Serializable{
     public void setEmUso(boolean x) {//vai definir se o caminhão está em uso ou não
         emUso = x;
     }
-
 }
