@@ -21,7 +21,7 @@ public class Motorista implements Serializable{
         this.porcenCom = porcenCom;
         this.salFixo = salFixo;
         this.senhaMotorista = senhaMotorista;
-    }
+    }//inicializar aqui os vetores de manutenção, viagem e abastecimento
 
     public String getNome() {// Função para pegar o nome do motorista.
         return this.nome;

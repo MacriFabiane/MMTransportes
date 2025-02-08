@@ -35,8 +35,9 @@ public class Gerencia implements Serializable {
 
     }
 
-    public String gerarListaMotoristaSalario(){
+    public void gerarListaMotoristaSalario(){
         //vai precisar chamar o soma salarios aqui
+        //SÓ PRINTAR NA TELA
     }
 
     public double calcularTotalSalarios(){
@@ -51,8 +52,9 @@ public class Gerencia implements Serializable {
         return  somaSalarios;
     }
 
-    public String gerearRelatorioLeDTotais(){ //gera relatorio de lucros e despesas totais do mes
+    public void gerearRelatorioLeDTotais(){ //gera relatorio de lucros e despesas totais do mes
         //vai chamar aui somar lucros e somar desesas e o diflucdes
+        //so printar 
     }
     
     public double somarLucros(){
@@ -60,10 +62,17 @@ public class Gerencia implements Serializable {
     }
 
     public double somarDespesas(){
+        if(motorista.registrarDespesas)
+
 
     }
 
     public double calcularDifLucDes(){
         //chamar soma des e soma luc aqui
+        
+    }
+
+    public void gerarListaDespesasLucrosTotaisMotoristaPlaca(){
+        //printar na tela só
     }
 }
