@@ -36,7 +36,7 @@ public class Motorista implements Serializable{
     public Motorista(String nome, int idade, int cnh, Date dataAdm, 
     int porcenCom, double salFixo, String senhaMotorista){
         this(nome, idade, cnh, dataAdm, null, porcenCom, salFixo, senhaMotorista);
-    }
+    }//inicializar aqui os vetores de manutenção, viagem e abastecimento
 
     public String getNome() {// Função para pegar o nome do motorista.
         return this.nome;
