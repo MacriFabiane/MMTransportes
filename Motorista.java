@@ -89,7 +89,7 @@ public class Motorista implements Serializable{
     }
 
     public void setDataDem(Date novaDem) {//Função que vai definir a data de demissão do motorista
-        dataDem = novaDem;
+        this.dataDem = novaDem;
     }
 
     public double calcularValorFrete(){  //calcula o valor do total do frete da viagem
