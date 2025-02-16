@@ -56,7 +56,7 @@ public class Motorista implements Serializable{
         }
     }//inicializar aqui os vetores de manutenção, viagem e abastecimento
 
-    public Motorista(){
+    public Motorista(){// naõ seria melhor botar a parada de null que nem no de cima, dataDem, prar todos os parâmetros nesse?
         for(int i=0; i<caminhao.length;i++){
             if(caminhao[i].getEmUso() == false){
                 this.placa = caminhao[i].getPlaca();

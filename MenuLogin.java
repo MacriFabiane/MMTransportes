@@ -1,44 +1,53 @@
 import java.util.Scanner;
 public class MenuLogin {
-       //copiar esse mesmo para o LoginGerente e LoginMotorista tbm 
+       
     public static void main(String[] args){
-        Campeonato campeonato = new Campeonato();
+        Motorista motorista = new Motorista();
         Scanner teclado = new Scanner (System.in);
-        String opcao;
+        int opcao;
+        String user, senha;
         boolean saida=false;
 
         do{
-            System.out.println ("..:: Menu interativo :..");
-            System.out.println ("(a) Para incluir um jogador ");
-            System.out.println ("(b) Para excluir um jogador (pelo nome)" );
-            System.out.println ("(c) Executar rodada");
-            System.out.println ("(d) Mostrar a cartela de resulatdos [da última jogada realizada]");
-            System.out.println ("(e) Gravar os dados do campeonato em arquivo");
-            System.out.println ("(f) Ler os dados do campeonato em arquivo");
-            System.out.println ("(g) Sair da aplicação");
+            System.out.println ("..::  Seja bem-vindo à:  ::..");
+            System.out.println ("..::  M&M TRANSPORTES  ::..");
+            System.out.println ("..:: Menu interativo ::..");
+            System.out.println ("(1) Para Fazer Login Como Gerente ");
+            System.out.println ("(2) Para Fazer Login como Motorista" );
+            System.out.println ("(3) Sair da aplicação");
             System.out.println("Entre com uma opção do menu: ");
             opcao = teclado.nextLine( );
 
             switch(opcao){
-                case "a":
-                    campeonato.incluirjogador();
+                case 1:
+                    System.out.println("Digite seu nome completo:");
+                    user = teclado.nextLine();
+                    System.out.println("Digite sua senha:");
+                    senha = teclado.nextLine();
+
+                    if(validarUsuario(user, senha) == true){  
+                        MenuGerente(); ///ver como eu chamo isso aqui
+                    }
+                    else {
+                        System.out.println("Bah! Nome ou senha incorreta! Tente novamente.");
+                        System.out.println("Caso o problema persistir entre em contato com o Administrador para recuperar sua senha.");
+                    }
                     break;
-                case "b":
-                    campeonato.removerJogador();
+                case 2:
+                    System.out.println("Digite seu nome completo:");
+                    user = teclado.nextLine();
+                    System.out.println("Digite sua senha:");
+                    senha = teclado.nextLine();
+
+                    if(validarUsuario(user, senha) == true){  
+                        MenuMotorista(); ///ver como eu chamo isso aqui
+                    }
+                    else {
+                        System.out.println("Bah! Nome ou senha incorreta! Tente novamente.");
+                        System.out.println("Caso o problema persistir entre em contato com o seu Gerente para recuperar ou redefinir sua senha.");
+                    }
                     break;
-                case "c":
-                    campeonato.iniciarCampeonato();
-                    break;
-                case "d":
-                    campeonato.mostrarCartela();
-                    break;
-                case "e":
-                    campeonato.gravarEmArquivo();
-                    break;
-                case "f":
-                    campeonato.lerDoArquivo();
-                    break;
-                case "g":
+                case 3:
                     System.out.println ("Saindo");
                     saida=true;
                     break;
@@ -47,6 +56,10 @@ public class MenuLogin {
             }
         }while(saida==false);
         teclado.close();
+    }
+
+    public Boolean validarUsuario(String nome, String senha){ //fazer a validadação aqui
+
     }
  }
 
