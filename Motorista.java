@@ -1,19 +1,20 @@
 import java.io.Serializable;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.Scanner;
 public class Motorista implements Serializable{
     private String nome = new String(); 
-    private int idade, cnh, porcenCom;
-    private double salFixo, kmIni, kmFim, valorFrete, pesoCarga;
+    private int idade, cnh, porcenCom, contCam = 5, contMot = 5, contViag = 15, contMan = 5, contAbas = 7;
     private Date dataAdm = new Date();
     private Date dataDem = new Date();
     private String senhaMotorista = new String();
     private Caminhao[] caminhao;
     private String placa = new String();
-    private String origem, destino, carregamento;
+    private double  salFixo;
 
     private Abastecimento[] abastecimento;
-    private Viagem viagem;
+    private Viagem[] viagem;
 
     // Construtor
     public Motorista(String nome, int idade, int cnh, Date dataAdm, Date dataDem, 
@@ -34,11 +35,25 @@ public class Motorista implements Serializable{
             }
             System.out.println("Não é possível adicionar novo motorista, pois todos os caminhões estão em uso!");
         }
+        for (int i = 0; i < viagem.length; i++) {
+            viagem[i] = null; // Define cada elemento como nulo
+        }
     }
 
     public Motorista(String nome, int idade, int cnh, Date dataAdm, 
     int porcenCom, double salFixo, String senhaMotorista){
         this(nome, idade, cnh, dataAdm, null, porcenCom, salFixo, senhaMotorista);
+        for(int i=0; i<caminhao.length;i++){
+            if(caminhao[i].getEmUso() == false){
+                this.placa = caminhao[i].getPlaca();
+                caminhao[i].setEmUso(true);
+                break;
+            }
+            System.out.println("Não é possível adicionar novo motorista, pois todos os caminhões estão em uso!");
+        }
+        for (int i = 0; i < viagem.length; i++) {
+            viagem[i] = null; // Define cada elemento como nulo
+        }
     }//inicializar aqui os vetores de manutenção, viagem e abastecimento
 
     public Motorista(){// naõ seria melhor botar a parada de null que nem no de cima, dataDem, prar todos os parâmetros nesse?
@@ -49,6 +64,9 @@ public class Motorista implements Serializable{
                 break;
             }
             System.out.println("Não é possível adicionar novo motorista, pois todos os caminhões estão em uso!");
+        }
+        for (int i = 0; i < viagem.length; i++) {
+            viagem[i] = null; // Define cada elemento como nulo
         }
     }
 
@@ -94,13 +112,15 @@ public class Motorista implements Serializable{
 
     public double calcularValorFrete(){  //calcula o valor do total do frete da viagem
         double valorTotalFrete;
-        valorTotalFrete = viagem.getPesoCarga() * viagem.getValorTonelada(); 
-        viagem.setValorFrete(valorTotalFrete);
+        valorTotalFrete = viagem[contViag].getPesoCarga() * viagem[contViag].getValorTonelada(); 
+        viagem[contViag].setValorFrete(valorTotalFrete);
 
-        return valorFrete;
+        return valorTotalFrete;
     }
 
     public void registrarViagem(){
+        double kmIni, kmFim, valorFrete, pesoCarga;
+        String origem, destino, carregamento;
         Scanner teclado = new Scanner(System.in);
 
         System.out.println("Origem: ");
@@ -117,9 +137,16 @@ public class Motorista implements Serializable{
         valorFrete = teclado.nextDouble();
         System.out.println("Peso da Carga: ");
         pesoCarga = teclado.nextDouble();
+
+        viagem[contViag] = new Viagem(origem, destino, carregamento, kmIni, kmFim, idade, pesoCarga, valorFrete, pesoCarga);
+
+        teclado.close();
     }
 
     public double calcularComissaoViagem(){
+        double comissaoViagem;
+        comissaoViagem = viagem[contViag].getValorFrete() * porcenCom;
+        viagem[contViag].setComissao(comissaoViagem);
 
         return comissaoViagem;
     }
@@ -156,7 +183,9 @@ public class Motorista implements Serializable{
     }
 
     public void registrarAbastecimento(){
-        Scanner teclado= new Scanner(System.in);
+        String nome,dataStr;
+        double litragem, valor;
+        Scanner teclado = new Scanner(System.in);
 
         System.out.println("Posto: ");
         nome = teclado.nextLine();
@@ -165,14 +194,19 @@ public class Motorista implements Serializable{
         System.out.println("Valor Abastecido: ");
         valor = teclado.nextDouble();
         System.out.println("Data de Abastecimento: ");
-        data = teclado.nextLine();
+        dataStr = teclado.nextLine();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        LocalDate data = LocalDate.parse(dataStr, formatter);
 
-        abastecimento[] = new Abastecimento(nome, litragem, valor, data);
-        
+        abastecimento[contAbas] = new Abastecimento(nome, litragem, valor, data);
+
+        teclado.close();
     }
 
     public void registrarManutencao(){
         Scanner teclado= new Scanner(System.in);
+
+        teclado.close();
     }
 
     public void gerarHolerite(){
@@ -180,6 +214,8 @@ public class Motorista implements Serializable{
     }
 
     public double calcularSomaSalCom(){
+        double somaSalCom;
+        somaSalCom = salFixo + viagem[contViag].getComissao();
         return somaSalCom;
     }
 

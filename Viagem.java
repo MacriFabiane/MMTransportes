@@ -1,7 +1,7 @@
 public class Viagem {
 
-    double kmIni, kmFin, valorTonelada, pesoCarga, valorFrete, comissao;
-    String origem, destino, carregamento;
+    private double kmIni, kmFin, valorTonelada, pesoCarga, valorFrete, comissao;
+    private String origem, destino, carregamento;
     
     public Viagem (String origem, String destino, String carregamento, double kmIni, double kmFin, double valorTonelada, double pesoCarga, double valorFrete, double comissao){
         this.origem = origem;
@@ -39,7 +39,7 @@ public class Viagem {
         return this.valorTonelada;
     }
 
-    public double getvalorFrete(){
+    public double getValorFrete(){
         return this.valorFrete;
     }
 
