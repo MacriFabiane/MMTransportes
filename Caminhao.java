@@ -5,7 +5,7 @@ public class Caminhao implements Serializable{
     private boolean emUso;
    
     // Construtor
-    public Caminhao(String placa, String chassi, Boolean emUso) { //teria que ser assim msm????
+    public Caminhao(String placa, String chassi, Boolean emUso) { 
         this.placa = placa;
         this.chassi = chassi;
         this.emUso = emUso;
