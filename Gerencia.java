@@ -14,9 +14,11 @@ public class Gerencia implements Serializable {
 
     //Construtor
     public Gerencia() {
-        this.n = 20;
+        this.n = 5;
         this.motoristas = new Motorista[n];
         this.caminhoes = new Caminhao[n];
+
+        //colocar aqui os dados de login do gerente
 
         for (int i=0; i<motoristas.length; i++){
             motoristas[i] = null; //define cada elemento como nulo
