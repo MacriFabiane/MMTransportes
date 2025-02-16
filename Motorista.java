@@ -35,6 +35,9 @@ public class Motorista implements Serializable{
             }
             System.out.println("Não é possível adicionar novo motorista, pois todos os caminhões estão em uso!");
         }
+        for (int i = 0; i < viagem.length; i++) {
+            viagem[i] = null; // Define cada elemento como nulo
+        }
     }
 
     public Motorista(String nome, int idade, int cnh, Date dataAdm, 
@@ -48,6 +51,9 @@ public class Motorista implements Serializable{
             }
             System.out.println("Não é possível adicionar novo motorista, pois todos os caminhões estão em uso!");
         }
+        for (int i = 0; i < viagem.length; i++) {
+            viagem[i] = null; // Define cada elemento como nulo
+        }
     }//inicializar aqui os vetores de manutenção, viagem e abastecimento
 
     public Motorista(){
@@ -58,6 +64,9 @@ public class Motorista implements Serializable{
                 break;
             }
             System.out.println("Não é possível adicionar novo motorista, pois todos os caminhões estão em uso!");
+        }
+        for (int i = 0; i < viagem.length; i++) {
+            viagem[i] = null; // Define cada elemento como nulo
         }
     }
 
