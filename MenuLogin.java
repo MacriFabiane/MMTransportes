@@ -16,7 +16,7 @@ public class MenuLogin {
             System.out.println ("(2) Para Fazer Login como Motorista" );
             System.out.println ("(3) Sair da aplicação");
             System.out.println("Entre com uma opção do menu: ");
-            opcao = teclado.nextInt( );
+            opcao = teclado.nextLine( );
 
             switch(opcao){
                 case "1":
