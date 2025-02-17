@@ -299,7 +299,7 @@ public class Motorista implements Serializable{
             System.out.println(" ");
             System.out.println("Comissão por viagem");
 
-            for(i=0; i<contViag; i++){
+            for(i=0; i<viagem.length; i++){
                 System.out.printf("Viagem ",i, ":", getPorcenCom()*viagem[i].getComissao());
                 somaComissao += getPorcenCom()*viagem[i].getComissao();
             }
