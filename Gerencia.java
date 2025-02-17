@@ -74,54 +74,114 @@ public class Gerencia implements Serializable {
                         System.out.println("Senha para o Motorista acessar o sistema:");
                         String senhaMotorista = teclado.nextLine();
                         String placa = caminhoes[i].getPlaca();
+
                         motoristas[j] = new Motorista(nome, idade, cnh, dataAdm, porcenCom, salFixo, senhaMotorista, placa);
                         caminhoes[i].setEmUso(true);
+                        break;
+                    }
+                    else if (caminhoes[4].getEmUso()==true) {
+                        System.out.println("Não há caminhões disponíveis na frota, para esse motorista. Não será possível a sua contratação.");
                     }
                 }
             }
+            else if (motoristas[j]!=null){
+                System.out.println("Não há vaga para um novo motorista!");
+            }
         }
- 
-        
     }
 
-    public void gerarListaMotoristaSalario(){
-        //vai precisar chamar o soma salarios aqui
-        //SÓ PRINTAR NA TELA
-    }
-
-    public double calcularTotalSalarios(){ //total salario do motorista (salario fixo mais as comissões das viagens do mês)
+    public double calcularTotalSalarios(){ //total salario de todos os motoristas (salario fixo mais as comissões das viagens do mês)
         
         for (int i=0; i<motoristas.length; i++){
 
-            if(motoristas[i] != null)//se o motorista existir
+            if(motoristas[i] != null){//se o motorista existir
                 somaSalarios += motoristas[i].getSalFixo(); //vai ter que somar tbm a comissão de cada viagem
-
+                for(int j=0; j<15; j++){
+                    if(motoristas[i].viagem[j]!= null)
+                        somaSalarios += motoristas[i].viagem[j].getComissao();
+                }
+            }
         }
-
         return  somaSalarios;
     }
 
-    public void gerearRelatorioLeDTotais(){ //gera relatorio de lucros e despesas totais do mes
-        //vai chamar aui somar lucros e somar desesas e o diflucdes
-        //so printar 
+    public void gerarListaMotoristaSalario(){
+        System.out.println("..::Folha de Pagamentos::..");
+        System.out.println("Motorista:                   Salário: ");
+        for(int i=0; i<5; i++){
+            System.out.printf("%s          R$: %.2f%n", motoristas[i], calcularTotalSalarioMotorista(i));
+        }
+        System.out.printf("Total gasto em salários: R$: %.2f%n", calcularTotalSalarios());
+    }
+
+    public double calcularTotalSalarioMotorista(int i){ //total salario do motorista (salario fixo mais as comissões das viagens do mês)
+        
+            if(motoristas[i] != null){//se o motorista existir
+                somaSalarios += motoristas[i].getSalFixo(); //vai ter que somar tbm a comissão de cada viagem
+                for(int j=0; j<15; j++){
+                    if(motoristas[i].viagem[j]!= null)
+                        somaSalarios += motoristas[i].viagem[j].getComissao();
+                }
+            }
+            return somaSalarios;
+    }
+
+    public void gerearRelatorioLeDTotais(){ //gera relatorio de lucros e despesas totais do mes //SEM DATA AINDA
+        double lucrosTotais = 0.0;
+        double despesasTotais = 0.0;
+        for(int i=0; i<5; i++){
+            lucrosTotais += somarLucros(i);
+            despesasTotais += somarDespesas(i);
+        }
+        System.out.println("..::Relatório de Lucros e Despesas Totais::..");
+        System.out.printf("Lucros = R$ %.2f%n", lucrosTotais);
+        System.out.printf("Despesas = R$ %.2f%n", despesasTotais);
+
     }
     
-    public double somarLucros(){
-        
+    public double somarLucros(int i){
+        double somaLucros = 0.0;
+
+        if(motoristas[i] != null){//se o motorista existir
+            
+            for(int j=0; j<15; j++){
+                if(motoristas[i].viagem[j]!= null)
+                    somaLucros += motoristas[i].viagem[j].getValorFrete();//soma o valor total do frete de cada viagem do motorista
+            }
+            somaLucros = somaLucros - somarDespesas(i); //desconto do lucro bruto as despesas para ter o lucro liquido 
+        }
+        return somaLucros;
     }
 
-    public double somarDespesas(){
-        if(motorista.registrarDespesas)
+    public double somarDespesas(int i){//FALTA RESTRINGIR DATA
+        double somaDespesas = 0.0;
 
+        if(motoristas[i] != null){//se o motorista existir
+            somaDespesas += calcularTotalSalarioMotorista(i); //soma o salario
+            for(int j=0; j<7; j++){
+                if(motoristas[i].abastecimento[j]!= null)
+                    somaDespesas += motoristas[i].abastecimento[j].getValor();//soma todos os gastos de abastecimento
+            }
+            for(int j=0; j<5; j++){
+                if(motoristas[i].manutencao[j]!= null)
+                    somaDespesas += motoristas[i].manutencao[j].getValor();//soma todos os gastos de manutenção
+            }
+        }
+        return somaDespesas;
 
     }
 
-    public double calcularDifLucDes(){
+    public double calcularDifLucDes(){ //acho q não preciso disso
         //chamar soma des e soma luc aqui
         
     }
 
     public void gerarListaDespesasLucrosTotaisMotoristaPlaca(){
-        //printar na tela só
+        System.out.println("..::Relatório de Lucros e Despesas Separados por Motorista::..");
+        System.out.println("Motorista:        Placa:         Despesas:        Lucros:");
+        for(int i=0; i<5; i++){
+            System.out.printf("%s       %s        R$: %.2f       R$: %.2f%n", motoristas[i], motoristas[i].getPlacaMot(), somarDespesas(i), somarLucros(i));
+        }
+        System.out.printf("Total gasto em salários: R$: %.2f%n", calcularTotalSalarios());
     }
 }
