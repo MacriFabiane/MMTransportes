@@ -64,15 +64,17 @@ public class Gerencia implements Serializable {
                         System.out.println("Idade: ");
                         int idade = teclado.nextInt();
                         System.out.println("CNH do novo motorista: ");
-                        String cnh = teclado.nextLine();
+                        int cnh = teclado.nextInt();
                         System.out.println("Data de Admissão: ");
                         String dataAdm = teclado.nextLine();
-                        System.out.println("CNH do novo motorista: ");
-                        String cnh = teclado.nextLine();
-                        System.out.println("CNH do novo motorista: ");
-                        String cnh = teclado.nextLine();
-                        
-                        motoristas[j] = new Motorista(nome, idade, cnh, dataAdm, null, porcenCom, salFixo, senhaMotorista, caminhoes[i].getPlaca());
+                        System.out.println("Porcentagem de comissão que o motorista vai receber: ");
+                        double porcenCom = teclado.nextDouble();
+                        System.out.println("Salario fio do motorista: ");
+                        double salFixo = teclado.nextDouble();
+                        System.out.println("Senha para o Motorista acessar o sistema:");
+                        String senhaMotorista = teclado.nextLine();
+                        String placa = caminhoes[i].getPlaca();
+                        motoristas[j] = new Motorista(nome, idade, cnh, dataAdm, porcenCom, salFixo, senhaMotorista, placa);
                         caminhoes[i].setEmUso(true);
                     }
                 }
