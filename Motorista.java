@@ -12,10 +12,8 @@ public class Motorista implements Serializable{
     public String placa = new String();
     public double  salFixo;
 
-    public Caminhao[] caminhao;
-    public Abastecimento[] abastecimento;
-    public Manutencao[] manutencao;
-    public Viagem[] viagem;
+    private Abastecimento[] abastecimento;
+    private Viagem[] viagem;
 
     // Construtor
     public Motorista(String nome, int idade, int cnh, Date dataAdm, Date dataDem, 
