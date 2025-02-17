@@ -12,6 +12,7 @@ public class Gerencia implements Serializable {
     public int n = 5; //suporta só até 5 motoristas/caminhoes
     public double somaSalarios = 0;
     public String nomeGerente, senhaGerente;
+    public Scanner teclado = new Scanner(System.in);
 
 
     //Construtor
@@ -31,9 +32,21 @@ public class Gerencia implements Serializable {
     }
 
     public void registrarcaminhao(){
+       
         for(int i=0; i<5 ; i++){
-            if(caminhoes[i] != null){
-                
+            if(caminhoes[i] == null){
+                System.out.println("Insira as informações abaixo para realizar o cadastro de um novo caminhão:");
+                System.out.println("Placa: ");
+                String placa = teclado.nextLine();
+                System.out.println("Chassi: ");
+                String chassi = teclado.nextLine();
+
+                caminhoes[i] = new Caminhao(placa, chassi, false);
+                System.out.println("Caminhão cadastrado com sucesso, Chefia!");
+                break;
+            }
+            else if(caminhoes[4] != null){
+                System.out.println("Não há como cadastrar um novo caminhão, pouco espaço na transportadora!");
             }
         }
         
@@ -41,6 +54,31 @@ public class Gerencia implements Serializable {
 
     public void registrarMotorista(){ //exemplo em campeonato
         //logica para checkar o caminhão q não tá em uso e definir a placa
+        for(int j=0; j<5; j++){
+            if(motoristas[j]==null){
+                for (int i=0; i<5; i++){
+                    if(caminhoes[i].getEmUso()==false){
+                        System.out.println("Insira as informações abaixo para realizar o registro de um novo motorista:");
+                        System.out.println("Nome Completo: ");
+                        String nome = teclado.nextLine();
+                        System.out.println("Idade: ");
+                        int idade = teclado.nextInt();
+                        System.out.println("CNH do novo motorista: ");
+                        String cnh = teclado.nextLine();
+                        System.out.println("Data de Admissão: ");
+                        String dataAdm = teclado.nextLine();
+                        System.out.println("CNH do novo motorista: ");
+                        String cnh = teclado.nextLine();
+                        System.out.println("CNH do novo motorista: ");
+                        String cnh = teclado.nextLine();
+                        
+                        motoristas[j] = new Motorista(nome, idade, cnh, dataAdm, null, porcenCom, salFixo, senhaMotorista, caminhoes[i].getPlaca());
+                        caminhoes[i].setEmUso(true);
+                    }
+                }
+            }
+        }
+ 
         
     }
 
