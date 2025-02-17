@@ -1,24 +1,24 @@
 import java.io.Serializable;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.Scanner;
 public class Motorista implements Serializable{
-    public String nome = new String(); 
-    public int idade, cnh, porcenCom, contCam = 5, contMot = 5, contViag = 15, contMan = 5, contAbas = 7;
-    public Date dataAdm = new Date();
-    public Date dataDem = new Date();
-    public String senhaMotorista = new String();
-    public Caminhao[] caminhao;
-    public String placa = new String();
-    public double  salFixo;
+    private String nome = new String(); 
+    private int idade, cnh, porcenCom, contCam = 5, contMot = 5, contViag = 15, contMan = 5, contAbas = 7;
+    private Date dataAdm = new Date();
+    private Date dataDem = new Date();
+    private String senhaMotorista = new String();
+    private String placa = new String();
+    private double  salFixo;
 
+    public Caminhao[] caminhao;
     public Abastecimento[] abastecimento;
+    public Manutencao[] manutencao;
     public Viagem[] viagem;
 
     // Construtor
     public Motorista(String nome, int idade, int cnh, Date dataAdm, Date dataDem, 
-    int porcenCom, double salFixo, String senhaMotorista) {
+    int porcenCom, double salFixo, String senhaMotorista, String placa) {
+
         this.nome = nome;
         this.idade = idade;
         this.cnh = cnh;
@@ -27,6 +27,11 @@ public class Motorista implements Serializable{
         this.porcenCom = porcenCom;
         this.salFixo = salFixo;
         this.senhaMotorista = senhaMotorista;
+        this.placa = placa;
+        this.viagem = new Viagem[contViag];
+        this.manutencao = new Manutencao[contMan];
+        this.abastecimento = new Abastecimento[contAbas];
+
         for(int i=0; i<caminhao.length;i++){
             if(caminhao[i].getEmUso() == false){
                 this.placa = caminhao[i].getPlaca();
@@ -35,14 +40,28 @@ public class Motorista implements Serializable{
             }
             System.out.println("Não é possível adicionar novo motorista, pois todos os caminhões estão em uso!");
         }
+
         for (int i = 0; i < viagem.length; i++) {
             viagem[i] = null; // Define cada elemento como nulo
+        }
+
+        for (int i = 0; i < abastecimento.length; i++) {
+            abastecimento[i] = null; // Define cada elemento como nulo
+        }
+
+        for (int i = 0; i < manutencao.length; i++) {
+            manutencao[i] = null; // Define cada elemento como nulo
         }
     }
 
     public Motorista(String nome, int idade, int cnh, Date dataAdm, 
-    int porcenCom, double salFixo, String senhaMotorista){
-        this(nome, idade, cnh, dataAdm, null, porcenCom, salFixo, senhaMotorista);
+    int porcenCom, double salFixo, String senhaMotorista, String placa){
+        this(nome, idade, cnh, dataAdm, null, porcenCom, salFixo, senhaMotorista, placa);
+
+        this.viagem = new Viagem[contViag];
+        this.manutencao = new Manutencao[contMan];
+        this.abastecimento = new Abastecimento[contAbas];
+
         for(int i=0; i<caminhao.length;i++){
             if(caminhao[i].getEmUso() == false){
                 this.placa = caminhao[i].getPlaca();
@@ -51,12 +70,26 @@ public class Motorista implements Serializable{
             }
             System.out.println("Não é possível adicionar novo motorista, pois todos os caminhões estão em uso!");
         }
+
         for (int i = 0; i < viagem.length; i++) {
             viagem[i] = null; // Define cada elemento como nulo
         }
-    }//inicializar aqui os vetores de manutenção, viagem e abastecimento
+        
+        for (int i = 0; i < abastecimento.length; i++) {
+            abastecimento[i] = null; // Define cada elemento como nulo
+        }
+
+        for (int i = 0; i < manutencao.length; i++) {
+            manutencao[i] = null; // Define cada elemento como nulo
+        }
+    }
 
     public Motorista(){// naõ seria melhor botar a parada de null que nem no de cima, dataDem, prar todos os parâmetros nesse?
+        
+        this.viagem = new Viagem[contViag];
+        this.manutencao = new Manutencao[contMan];
+        this.abastecimento = new Abastecimento[contAbas];
+
         for(int i=0; i<caminhao.length;i++){
             if(caminhao[i].getEmUso() == false){
                 this.placa = caminhao[i].getPlaca();
@@ -65,8 +98,17 @@ public class Motorista implements Serializable{
             }
             System.out.println("Não é possível adicionar novo motorista, pois todos os caminhões estão em uso!");
         }
+
         for (int i = 0; i < viagem.length; i++) {
             viagem[i] = null; // Define cada elemento como nulo
+        }
+        
+        for (int i = 0; i < abastecimento.length; i++) {
+            abastecimento[i] = null; // Define cada elemento como nulo
+        }
+
+        for (int i = 0; i < manutencao.length; i++) {
+            manutencao[i] = null; // Define cada elemento como nulo
         }
     }
 
@@ -110,43 +152,52 @@ public class Motorista implements Serializable{
         this.dataDem = novaDem;
     }
 
-    public double calcularValorFrete(){  //calcula o valor do total do frete da viagem
+    public double calcularValorFrete(int i){  //calcula o valor do total do frete da viagem
         double valorTotalFrete;
-        valorTotalFrete = viagem[contViag].getPesoCarga() * viagem[contViag].getValorTonelada(); 
-        viagem[contViag].setValorFrete(valorTotalFrete);
+        valorTotalFrete = viagem[i].getPesoCarga() * viagem[i].getValorTonelada(); 
+        viagem[i].setValorFrete(valorTotalFrete);
 
         return valorTotalFrete;
     }
 
     public void registrarViagem(){
-        double kmIni, kmFim, valorFrete, pesoCarga;
+        double kmIni, kmFim, valorTonelada, pesoCarga, valorFrete, valorComissaoViagem;
         String origem, destino, carregamento;
         Scanner teclado = new Scanner(System.in);
+        int i;
+        for (i = 0; i < contViag; i++) {
+            if(viagem[i] == null){
+                System.out.println("Origem: ");
+                origem = teclado.nextLine();
+                System.out.println("Destino: ");
+                destino = teclado.nextLine();
+                System.out.println("Carregamento: ");
+                carregamento = teclado.nextLine();
+                System.out.println("Km Inicial: ");
+                kmIni = teclado.nextDouble();
+                System.out.println("Km Final: ");
+                kmFim = teclado.nextDouble();
+                System.out.println("Valor do Frete por Tonelada: ");
+                valorTonelada = teclado.nextDouble();
+                System.out.println("Peso da Carga: ");
+                pesoCarga = teclado.nextDouble();
+                valorComissaoViagem = calcularComissaoViagem(i);
+                valorFrete = calcularValorFrete(i);
 
-        System.out.println("Origem: ");
-        origem = teclado.nextLine();
-        System.out.println("Destino: ");
-        destino = teclado.nextLine();
-        System.out.println("Carregamento: ");
-        carregamento = teclado.nextLine();
-        System.out.println("Km Inicial: ");
-        kmIni = teclado.nextDouble();
-        System.out.println("Km Final: ");
-        kmFim = teclado.nextDouble();
-        System.out.println("Valor do Frete por Tonelada: ");
-        valorFrete = teclado.nextDouble();
-        System.out.println("Peso da Carga: ");
-        pesoCarga = teclado.nextDouble();
-
-        viagem[contViag] = new Viagem(origem, destino, carregamento, kmIni, kmFim, idade, pesoCarga, valorFrete, pesoCarga);
+                viagem[i] = new Viagem(origem, destino, carregamento, kmIni, kmFim, valorTonelada, pesoCarga, valorFrete,valorComissaoViagem);
+            } 
+        }
+        if(i==contViag){
+            System.out.println("Quantidade de Viagens está cheia!");
+        }
 
         teclado.close();
     }
 
-    public double calcularComissaoViagem(){
+    public double calcularComissaoViagem(int i){
         double comissaoViagem;
-        comissaoViagem = viagem[contViag].getValorFrete() * porcenCom;
-        viagem[contViag].setComissao(comissaoViagem);
+        comissaoViagem = viagem[i].getValorFrete() * porcenCom;
+        viagem[i].setComissao(comissaoViagem);
 
         return comissaoViagem;
     }
@@ -186,31 +237,78 @@ public class Motorista implements Serializable{
         String nome,dataStr;
         double litragem, valor;
         Scanner teclado = new Scanner(System.in);
+        int i;
+        for (i = 0; i < contAbas; i++) {
+            if(abastecimento[i] == null){
+                System.out.println("Posto: ");
+                nome = teclado.nextLine();
+                System.out.println("Litragem Abastecido: ");
+                litragem = teclado.nextDouble();
+                System.out.println("Valor Abastecido: ");
+                valor = teclado.nextDouble();
+                System.out.println("Data de Abastecimento: (dd/MM/yyyy)");
+                dataStr = teclado.nextLine();
 
-        System.out.println("Posto: ");
-        nome = teclado.nextLine();
-        System.out.println("Litragem Abastecido: ");
-        litragem = teclado.nextDouble();
-        System.out.println("Valor Abastecido: ");
-        valor = teclado.nextDouble();
-        System.out.println("Data de Abastecimento: ");
-        dataStr = teclado.nextLine();
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-        LocalDate data = LocalDate.parse(dataStr, formatter);
-
-        abastecimento[contAbas] = new Abastecimento(nome, litragem, valor, data);
+                abastecimento[i] = new Abastecimento(nome, litragem, valor, dataStr);
+            }
+        }
+        if(i==contAbas-1){
+            System.out.println("Quantidade de Abastecimento está cheio!");
+        }
 
         teclado.close();
     }
 
     public void registrarManutencao(){
-        Scanner teclado= new Scanner(System.in);
+        String nome, descricao, dataStr;
+        double valor;
+        Scanner teclado = new Scanner(System.in);
+        int i;
+
+        for (i = 0; i < contMan; i++) {
+            if(manutencao[i] == null){
+                System.out.println("Nome: ");
+                nome = teclado.nextLine();
+                System.out.println("Descrição: ");
+                descricao = teclado.nextLine();
+                System.out.println("Valor Abastecido: ");
+                valor = teclado.nextDouble();
+                System.out.println("Data da Manutenção: (dd/MM/yyyy)");
+                dataStr = teclado.nextLine();
+
+                manutencao[i] = new Manutencao(nome, descricao, valor, dataStr);
+            }
+        }
+        if(i==contMan){
+            System.out.println("Quantidade de Manutenções está cheia!");
+        }
 
         teclado.close();
     }
 
     public void gerarHolerite(){
-        
+        Scanner teclado = new Scanner(System.in);
+        String opcao;
+        double somaComissao = 0;     
+        int i;
+
+        do{
+            System.out.println("Holerite do mês:");
+            System.out.println(" ");
+            System.out.printf("Salário Fixo: R$ ", getSalFixo());
+            System.out.println(" ");
+            System.out.println("Comissão por viagem");
+
+            for(i=0; i<viagem.length; i++){
+                System.out.printf("Viagem ",i, ":", getPorcenCom()*viagem[i].getComissao());
+                somaComissao += getPorcenCom()*viagem[i].getComissao();
+            }
+            System.out.printf("Soma de Todas as Comissões: R$ ", somaComissao);
+            System.out.printf("Salário Fixo + Comissões: R$ ", getSalFixo()+somaComissao);
+            System.out.println(" ");
+            System.out.println("Deseja sair da página? S - Sim  /  N - Não ");
+            opcao = teclado.nextLine();
+        }while(opcao!="S");
     }
 
     public double calcularSomaSalCom(){

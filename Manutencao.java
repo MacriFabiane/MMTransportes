@@ -1,12 +1,10 @@
-import java.util.Date;
-
 public class Manutencao {
-        private String nome = new String(); 
-        private String descricao = new String(); 
-        private double valor;
-        private Date data;
+    private String nome = new String(); 
+    private String descricao = new String(); 
+    private double valor;
+    private String data;
 
-    public Manutencao(String nome, String descricao, double valor, Date data){
+    public Manutencao(String nome, String descricao, double valor, String data){
         this.nome = nome;
         this.descricao = descricao;
         this.valor = valor;
@@ -25,7 +23,7 @@ public class Manutencao {
         return this.valor;
     }
 
-    public Date getData() {// Função para pegar a data da manutenção.
+    public String getData() {// Função para pegar a data da manutenção.
         return this.data;
     }
 }

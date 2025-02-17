@@ -11,8 +11,6 @@ public class Caminhao implements Serializable{
         this.emUso = emUso;
     }
 
-    public Caminhao(){}
-
     public String getPlaca() {// Função para pegar a placa do caminhão.
         return this.placa;
     }

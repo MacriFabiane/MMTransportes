@@ -1,11 +1,9 @@
-import java.util.Date;
-
 public class Abastecimento {
-        private String nome = new String(); 
-        private double litragem, valor;
-        private Date data;
+    private String nome = new String(); 
+    private double litragem, valor;
+    private String data;
 
-    public Abastecimento(String nome, double litragem, double valor, Date data){
+    public Abastecimento(String nome, double litragem, double valor, String data){
         this.nome = nome;
         this.litragem = litragem;
         this.valor = valor;
@@ -24,7 +22,7 @@ public class Abastecimento {
         return this.valor;
     }
 
-    public Date getData() {// Função para pegar a data do abastecimento.
+    public String getData() {// Função para pegar a data do abastecimento.
         return this.data;
     }
 }
