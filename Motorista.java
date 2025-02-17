@@ -14,11 +14,13 @@ public class Motorista implements Serializable{
     private double  salFixo;
 
     private Abastecimento[] abastecimento;
+    private Manutencao[] manutencao;
     private Viagem[] viagem;
 
     // Construtor
     public Motorista(String nome, int idade, int cnh, Date dataAdm, Date dataDem, 
     int porcenCom, double salFixo, String senhaMotorista) {
+
         this.nome = nome;
         this.idade = idade;
         this.cnh = cnh;
@@ -27,6 +29,10 @@ public class Motorista implements Serializable{
         this.porcenCom = porcenCom;
         this.salFixo = salFixo;
         this.senhaMotorista = senhaMotorista;
+        this.viagem = new Viagem[contViag];
+        this.manutencao = new Manutencao[contMan];
+        this.abastecimento = new Abastecimento[contAbas];
+
         for(int i=0; i<caminhao.length;i++){
             if(caminhao[i].getEmUso() == false){
                 this.placa = caminhao[i].getPlaca();
@@ -35,14 +41,28 @@ public class Motorista implements Serializable{
             }
             System.out.println("Não é possível adicionar novo motorista, pois todos os caminhões estão em uso!");
         }
+
         for (int i = 0; i < viagem.length; i++) {
             viagem[i] = null; // Define cada elemento como nulo
+        }
+
+        for (int i = 0; i < abastecimento.length; i++) {
+            abastecimento[i] = null; // Define cada elemento como nulo
+        }
+
+        for (int i = 0; i < manutencao.length; i++) {
+            manutencao[i] = null; // Define cada elemento como nulo
         }
     }
 
     public Motorista(String nome, int idade, int cnh, Date dataAdm, 
     int porcenCom, double salFixo, String senhaMotorista){
         this(nome, idade, cnh, dataAdm, null, porcenCom, salFixo, senhaMotorista);
+
+        this.viagem = new Viagem[contViag];
+        this.manutencao = new Manutencao[contMan];
+        this.abastecimento = new Abastecimento[contAbas];
+
         for(int i=0; i<caminhao.length;i++){
             if(caminhao[i].getEmUso() == false){
                 this.placa = caminhao[i].getPlaca();
@@ -51,12 +71,26 @@ public class Motorista implements Serializable{
             }
             System.out.println("Não é possível adicionar novo motorista, pois todos os caminhões estão em uso!");
         }
+
         for (int i = 0; i < viagem.length; i++) {
             viagem[i] = null; // Define cada elemento como nulo
+        }
+        
+        for (int i = 0; i < abastecimento.length; i++) {
+            abastecimento[i] = null; // Define cada elemento como nulo
+        }
+
+        for (int i = 0; i < manutencao.length; i++) {
+            manutencao[i] = null; // Define cada elemento como nulo
         }
     }//inicializar aqui os vetores de manutenção, viagem e abastecimento
 
     public Motorista(){// naõ seria melhor botar a parada de null que nem no de cima, dataDem, prar todos os parâmetros nesse?
+        
+        this.viagem = new Viagem[contViag];
+        this.manutencao = new Manutencao[contMan];
+        this.abastecimento = new Abastecimento[contAbas];
+
         for(int i=0; i<caminhao.length;i++){
             if(caminhao[i].getEmUso() == false){
                 this.placa = caminhao[i].getPlaca();
@@ -65,8 +99,17 @@ public class Motorista implements Serializable{
             }
             System.out.println("Não é possível adicionar novo motorista, pois todos os caminhões estão em uso!");
         }
+
         for (int i = 0; i < viagem.length; i++) {
             viagem[i] = null; // Define cada elemento como nulo
+        }
+        
+        for (int i = 0; i < abastecimento.length; i++) {
+            abastecimento[i] = null; // Define cada elemento como nulo
+        }
+
+        for (int i = 0; i < manutencao.length; i++) {
+            manutencao[i] = null; // Define cada elemento como nulo
         }
     }
 

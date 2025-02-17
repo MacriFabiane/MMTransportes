@@ -16,7 +16,7 @@ public class MenuLogin {
             System.out.println ("(2) Para Fazer Login como Motorista" );
             System.out.println ("(3) Sair da aplicação");
             System.out.println("Entre com uma opção do menu: ");
-            opcao = teclado.nextLine( );
+            opcao = teclado.nextInt( );
 
             switch(opcao){
                 case 1:
@@ -40,7 +40,7 @@ public class MenuLogin {
                     senha = teclado.nextLine();
 
                     if(validarUsuario(user, senha) == true){  
-                        MenuMotorista(); ///ver como eu chamo isso aqui
+                        new MenuMotorista(); ///ver como eu chamo isso aqui
                     }
                     else {
                         System.out.println("Bah! Nome ou senha incorreta! Tente novamente.");

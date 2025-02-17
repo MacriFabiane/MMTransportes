@@ -7,7 +7,7 @@ O presente trabalho se resumiu em fazer toda a <b> Especificção de Requisitos 
 
 ### Ferramentas e Tecnologias:
 * Para a construção dos diagramas foi utilizada a licença acadêmica do software <b> Visual Paradigm Community Edition </b>
-* Para a implementção foi escolhida a linguagem <b> Java - versão  11.0.20 </b>
+* Para a implementação foi escolhida a linguagem <b> Java - versão  11.0.20 </b>
 
 ## Escopo:
 O aplicativo que está sendo projetado visa facilitar o acesso e preenchimento de dados de uma empresa de transportes, que antes utilizavam planilhas eletrônicas para fazer cálculos e guardar informações de funcionários, caminhões e fretes. Além de facilitar outras análises dessa grande quantidade de informações, como despesas e lucros de cada caminhão separadamente.
