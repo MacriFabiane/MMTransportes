@@ -4,17 +4,17 @@ import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.Scanner;
 public class Motorista implements Serializable{
-    private String nome = new String(); 
-    private int idade, cnh, porcenCom, contCam = 5, contMot = 5, contViag = 15, contMan = 5, contAbas = 7;
-    private Date dataAdm = new Date();
-    private Date dataDem = new Date();
-    private String senhaMotorista = new String();
-    private Caminhao[] caminhao;
-    private String placa = new String();
-    private double  salFixo;
+    public String nome = new String(); 
+    public int idade, cnh, porcenCom, contCam = 5, contMot = 5, contViag = 15, contMan = 5, contAbas = 7;
+    public Date dataAdm = new Date();
+    public Date dataDem = new Date();
+    public String senhaMotorista = new String();
+    public Caminhao[] caminhao;
+    public String placa = new String();
+    public double  salFixo;
 
-    private Abastecimento[] abastecimento;
-    private Viagem[] viagem;
+    public Abastecimento[] abastecimento;
+    public Viagem[] viagem;
 
     // Construtor
     public Motorista(String nome, int idade, int cnh, Date dataAdm, Date dataDem, 

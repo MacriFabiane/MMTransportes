@@ -2,9 +2,9 @@ import java.util.Scanner;
 public class MenuLogin {
        
     public static void main(String[] args){
-        Motorista motorista = new Motorista();
+        Gerencia gerencia = new Gerencia();
         Scanner teclado = new Scanner (System.in);
-        int opcao;
+        String opcao;
         String user, senha;
         boolean saida=false;
 
@@ -19,35 +19,36 @@ public class MenuLogin {
             opcao = teclado.nextLine( );
 
             switch(opcao){
-                case 1:
+                case "1":
                     System.out.println("Digite seu nome completo:");
                     user = teclado.nextLine();
                     System.out.println("Digite sua senha:");
                     senha = teclado.nextLine();
 
-                    if(validarUsuario(user, senha) == true){  
-                        MenuGerente(); ///ver como eu chamo isso aqui
+                    boolean validacao= validarUsuario(user, senha, opcao, gerencia);
+                    if(validacao == true){  
+                        new MenuGerente(); ///ver se isso aqui funciona ou fazer o menu gerente ser um método e n um construtor
                     }
                     else {
                         System.out.println("Bah! Nome ou senha incorreta! Tente novamente.");
                         System.out.println("Caso o problema persistir entre em contato com o Administrador para recuperar sua senha.");
                     }
                     break;
-                case 2:
+                case "2":
                     System.out.println("Digite seu nome completo:");
                     user = teclado.nextLine();
                     System.out.println("Digite sua senha:");
                     senha = teclado.nextLine();
 
-                    if(validarUsuario(user, senha) == true){  
-                        MenuMotorista(); ///ver como eu chamo isso aqui
+                    if(validarUsuario(user, senha, opcao, gerencia) == true){  
+                        new MenuMotorista(); ///ver como eu chamo isso aqui
                     }
                     else {
                         System.out.println("Bah! Nome ou senha incorreta! Tente novamente.");
                         System.out.println("Caso o problema persistir entre em contato com o seu Gerente para recuperar ou redefinir sua senha.");
                     }
                     break;
-                case 3:
+                case "3":
                     System.out.println ("Saindo");
                     saida=true;
                     break;
@@ -58,8 +59,18 @@ public class MenuLogin {
         teclado.close();
     }
 
-    public Boolean validarUsuario(String nome, String senha){ //fazer a validadação aqui
-
+    public static Boolean validarUsuario(String nome, String senha, String tipoLogin, Gerencia gerencia){ //fazer a validadação aqui
+        if(tipoLogin == "1" && nome == gerencia.nomeGerente && senha == gerencia.senhaGerente){
+            return true;
+        }
+        if(tipoLogin == "2"){
+            for (int i=0; i<5; i++){//vai percorrer todos os motoristas
+                if(nome == gerencia.motoristas[i].getNome() && senha == gerencia.motoristas[i].getSenhaMotorista()){
+                    return true;
+                }
+            }
+        }
+        return false;
     }
  }
 
