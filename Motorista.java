@@ -1,13 +1,14 @@
 import java.io.Serializable;
+import java.util.Date;
 import java.util.Scanner;
 public class Motorista implements Serializable{
     private String nome = new String(); 
-    private int idade, cnh, contCam = 5, contMot = 5, contViag = 15, contMan = 5, contAbas = 7;
-    private String dataAdm = new String();
-    private String dataDem = new String();
+    private int idade, cnh, porcenCom, contCam = 5, contMot = 5, contViag = 15, contMan = 5, contAbas = 7;
+    private Date dataAdm = new Date();
+    private Date dataDem = new Date();
     private String senhaMotorista = new String();
     private String placa = new String();
-    private double  salFixo, porcenCom;
+    private double  salFixo;
 
     public Caminhao[] caminhao;
     public Abastecimento[] abastecimento;
@@ -15,8 +16,8 @@ public class Motorista implements Serializable{
     public Viagem[] viagem;
 
     // Construtor
-    public Motorista(String nome, int idade, int cnh, String dataAdm, String dataDem, 
-    double porcenCom, double salFixo, String senhaMotorista, String placa) {
+    public Motorista(String nome, int idade, int cnh, Date dataAdm, Date dataDem, 
+    int porcenCom, double salFixo, String senhaMotorista, String placa) {
 
         this.nome = nome;
         this.idade = idade;
@@ -31,14 +32,14 @@ public class Motorista implements Serializable{
         this.manutencao = new Manutencao[contMan];
         this.abastecimento = new Abastecimento[contAbas];
 
-        for(int i=0; i<caminhao.length;i++){
-            if(caminhao[i].getEmUso() == false){
-                this.placa = caminhao[i].getPlaca();
-                caminhao[i].setEmUso(true);
-                break;
-            }
-            System.out.println("Não é possível adicionar novo motorista, pois todos os caminhões estão em uso!");
-        }
+        // for(int i=0; i<caminhao.length;i++){
+        //     if(caminhao[i].getEmUso() == false){
+        //         this.placa = caminhao[i].getPlaca();
+        //         caminhao[i].setEmUso(true);
+        //         break;
+        //     }
+        //     System.out.println("Não é possível adicionar novo motorista, pois todos os caminhões estão em uso!");
+        // }
 
         for (int i = 0; i < viagem.length; i++) {
             viagem[i] = null; // Define cada elemento como nulo
@@ -53,22 +54,22 @@ public class Motorista implements Serializable{
         }
     }
 
-    public Motorista(String nome, int idade, int cnh, String dataAdm, 
-    double porcenCom, double salFixo, String senhaMotorista, String placa){
+    public Motorista(String nome, int idade, int cnh, Date dataAdm, 
+    int porcenCom, double salFixo, String senhaMotorista, String placa){
         this(nome, idade, cnh, dataAdm, null, porcenCom, salFixo, senhaMotorista, placa);
 
         this.viagem = new Viagem[contViag];
         this.manutencao = new Manutencao[contMan];
         this.abastecimento = new Abastecimento[contAbas];
 
-        for(int i=0; i<caminhao.length;i++){
-            if(caminhao[i].getEmUso() == false){
-                this.placa = caminhao[i].getPlaca();
-                caminhao[i].setEmUso(true);
-                break;
-            }
-            System.out.println("Não é possível adicionar novo motorista, pois todos os caminhões estão em uso!");
-        }
+        // for(int i=0; i<caminhao.length;i++){
+        //     if(caminhao[i].getEmUso() == false){
+        //         this.placa = caminhao[i].getPlaca();
+        //         caminhao[i].setEmUso(true);
+        //         break;
+        //     }
+        //     System.out.println("Não é possível adicionar novo motorista, pois todos os caminhões estão em uso!");
+        // }
 
         for (int i = 0; i < viagem.length; i++) {
             viagem[i] = null; // Define cada elemento como nulo
@@ -89,14 +90,14 @@ public class Motorista implements Serializable{
         this.manutencao = new Manutencao[contMan];
         this.abastecimento = new Abastecimento[contAbas];
 
-        for(int i=0; i<caminhao.length;i++){
-            if(caminhao[i].getEmUso() == false){
-                this.placa = caminhao[i].getPlaca();
-                caminhao[i].setEmUso(true);
-                break;
-            }
-            System.out.println("Não é possível adicionar novo motorista, pois todos os caminhões estão em uso!");
-        }
+        // for(int i=0; i<caminhao.length;i++){
+        //     if(caminhao[i].getEmUso() == false){
+        //         this.placa = caminhao[i].getPlaca();
+        //         caminhao[i].setEmUso(true);
+        //         break;
+        //     }
+        //     System.out.println("Não é possível adicionar novo motorista, pois todos os caminhões estão em uso!");
+        // }
 
         for (int i = 0; i < viagem.length; i++) {
             viagem[i] = null; // Define cada elemento como nulo
@@ -123,11 +124,11 @@ public class Motorista implements Serializable{
         return this.cnh;
     }
 
-    public String getDataAdm() {// Função para pegar a data de admissão do motorista.
+    public Date getDataAdm() {// Função para pegar a data de admissão do motorista.
         return this.dataAdm;
     }
 
-    public String getDataDem() {// Função para pegar a data de demissao do motorista.
+    public Date getDataDem() {// Função para pegar a data de demissao do motorista.
         return this.dataDem;
     }
 
@@ -135,7 +136,7 @@ public class Motorista implements Serializable{
         return this.placa;
     }
 
-    public double getPorcenCom() {// Função para pegar a porcentagem de comissão do motorista.
+    public int getPorcenCom() {// Função para pegar a porcentagem de comissão do motorista.
         return this.porcenCom;
     }
 
@@ -147,7 +148,7 @@ public class Motorista implements Serializable{
         return this.senhaMotorista;
     }
 
-    public void setDataDem(String novaDem) {//Função que vai definir a data de demissão do motorista
+    public void setDataDem(Date novaDem) {//Função que vai definir a data de demissão do motorista
         this.dataDem = novaDem;
     }
 

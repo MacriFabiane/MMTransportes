@@ -171,10 +171,10 @@ public class Gerencia implements Serializable {
 
     }
 
-    public double calcularDifLucDes(){ //acho q não preciso disso
-        //chamar soma des e soma luc aqui
+    // public double calcularDifLucDes(){ //acho q não preciso disso
+    //     //chamar soma des e soma luc aqui
         
-    }
+    // }
 
     public void gerarListaDespesasLucrosTotaisMotoristaPlaca(){
         System.out.println("..::Relatório de Lucros e Despesas Separados por Motorista::..");
