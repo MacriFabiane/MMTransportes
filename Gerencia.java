@@ -57,20 +57,24 @@ public class Gerencia implements Serializable {
         for(int j=0; j<5; j++){
             if(motoristas[j]==null){
                 for (int i=0; i<5; i++){
-                    if(caminhoes[i].getEmUso()==false){
+                    if(caminhoes[i] != null && caminhoes[i].getEmUso()==false){
                         System.out.println("Insira as informações abaixo para realizar o registro de um novo motorista:");
                         System.out.println("Nome Completo: ");
                         String nome = teclado.nextLine();
                         System.out.println("Idade: ");
                         int idade = teclado.nextInt();
+                        teclado.nextLine(); // Limpa o buffer
                         System.out.println("CNH do novo motorista: ");
                         int cnh = teclado.nextInt();
+                        teclado.nextLine(); // Limpa o buffer
                         System.out.println("Data de Admissão: ");
                         String dataAdm = teclado.nextLine();
                         System.out.println("Porcentagem de comissão que o motorista vai receber: ");
                         double porcenCom = teclado.nextDouble();
-                        System.out.println("Salario fio do motorista: ");
+                        teclado.nextLine(); // Limpa o buffer
+                        System.out.println("Salario fixo do motorista: ");
                         double salFixo = teclado.nextDouble();
+                        teclado.nextLine(); // Limpa o buffer
                         System.out.println("Senha para o Motorista acessar o sistema:");
                         String senhaMotorista = teclado.nextLine();
                         String placa = caminhoes[i].getPlaca();
@@ -79,7 +83,7 @@ public class Gerencia implements Serializable {
                         caminhoes[i].setEmUso(true);
                         break;
                     }
-                    else if (caminhoes[4].getEmUso()==true) {
+                    else if (caminhoes[4] != null && caminhoes[4].getEmUso()==true) {
                         System.out.println("Não há caminhões disponíveis na frota, para esse motorista. Não será possível a sua contratação.");
                     }
                 }

@@ -14,7 +14,7 @@ public class MenuGerente {
             System.out.println ("(c) Para Gerar Folha de Pagamento dos Funcionários");
             System.out.println ("(d) Para Gerar Relatório de Lucros e Despesas Totais da Transportadora");
             System.out.println ("(e) Para Gerar Relatório de Lucros e Despesas da Transportadora Separado por Motorista e Placa");
-            System.out.println ("(f) Sair da Aplicação");
+            System.out.println ("(f) Voltar para a Página Principal");
             System.out.println("Entre com uma opção do menu: ");
             opcao = teclado.nextLine( );
 
@@ -42,6 +42,6 @@ public class MenuGerente {
                     System.out.println ("Opcao invalida. Tente novamente");
             }
         }while(saida==false);
-        teclado.close();
+        //teclado.close();
     }
 }

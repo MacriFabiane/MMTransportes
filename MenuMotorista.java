@@ -12,7 +12,7 @@ public class MenuMotorista {
             System.out.println ("(a) Para Registrar viagem ");
             System.out.println ("(b) Para Gerar holerite " );
             System.out.println ("(c) Para Registrar Despesas do Caminhão ");
-            System.out.println ("(d) Sair da Aplicação");
+            System.out.println ("(d) Voltar para a Página Principal");
             System.out.println("Entre com uma opção do menu: ");
             opcao = teclado.nextLine( );
 
@@ -34,6 +34,5 @@ public class MenuMotorista {
                     System.out.println ("Opcao invalida. Tente novamente");
             }
         }while(saida==false);
-        teclado.close();
     }
 }

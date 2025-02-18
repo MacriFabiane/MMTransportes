@@ -3,12 +3,12 @@ import java.util.Date;
 import java.util.Scanner;
 public class Motorista implements Serializable{
     private String nome = new String(); 
-    private int idade, cnh, porcenCom, contCam = 5, contMot = 5, contViag = 15, contMan = 5, contAbas = 7;
-    private Date dataAdm = new Date();
+    private int idade, cnh, contCam = 5, contMot = 5, contViag = 15, contMan = 5, contAbas = 7;
+    private String dataAdm = new String();
     private Date dataDem = new Date();
     private String senhaMotorista = new String();
     private String placa = new String();
-    private double  salFixo;
+    private double  salFixo, porcenCom;
 
     public Caminhao[] caminhao;
     public Abastecimento[] abastecimento;
@@ -16,8 +16,8 @@ public class Motorista implements Serializable{
     public Viagem[] viagem;
 
     // Construtor
-    public Motorista(String nome, int idade, int cnh, Date dataAdm, Date dataDem, 
-    int porcenCom, double salFixo, String senhaMotorista, String placa) {
+    public Motorista(String nome, int idade, int cnh, String dataAdm, Date dataDem, 
+    double porcenCom, double salFixo, String senhaMotorista, String placa) {
 
         this.nome = nome;
         this.idade = idade;
@@ -54,8 +54,8 @@ public class Motorista implements Serializable{
         }
     }
 
-    public Motorista(String nome, int idade, int cnh, Date dataAdm, 
-    int porcenCom, double salFixo, String senhaMotorista, String placa){
+    public Motorista(String nome, int idade, int cnh, String dataAdm, 
+    double porcenCom, double salFixo, String senhaMotorista, String placa){
         this(nome, idade, cnh, dataAdm, null, porcenCom, salFixo, senhaMotorista, placa);
 
         this.viagem = new Viagem[contViag];
@@ -191,7 +191,6 @@ public class Motorista implements Serializable{
             System.out.println("Quantidade de Viagens está cheia!");
         }
 
-        teclado.close();
     }
 
     public double calcularComissaoViagem(int i){
@@ -230,7 +229,6 @@ public class Motorista implements Serializable{
                     System.out.println ("Opcao invalida. Tente novamente");
             }
         }while(saida==false);
-        teclado.close();
     }
 
     public void registrarAbastecimento(){
@@ -256,7 +254,6 @@ public class Motorista implements Serializable{
             System.out.println("Quantidade de Abastecimento está cheio!");
         }
 
-        teclado.close();
     }
 
     public void registrarManutencao(){
@@ -283,7 +280,6 @@ public class Motorista implements Serializable{
             System.out.println("Quantidade de Manutenções está cheia!");
         }
 
-        teclado.close();
     }
 
     public void gerarHolerite(){
