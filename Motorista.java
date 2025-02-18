@@ -188,6 +188,7 @@ public class Motorista implements Serializable{
         }
         if(i==contViag){
             System.out.println("Quantidade de Viagens está cheia!");
+            System.out.print("\n");
         }
 
         teclado.close();
@@ -253,6 +254,7 @@ public class Motorista implements Serializable{
         }
         if(i==contAbas-1){
             System.out.println("Quantidade de Abastecimento está cheio!");
+            System.out.print("\n");
         }
 
         teclado.close();
@@ -280,6 +282,7 @@ public class Motorista implements Serializable{
         }
         if(i==contMan){
             System.out.println("Quantidade de Manutenções está cheia!");
+            System.out.print("\n");
         }
 
         teclado.close();
@@ -308,6 +311,7 @@ public class Motorista implements Serializable{
             System.out.println("Deseja sair da página? S - Sim  /  N - Não ");
             opcao = teclado.nextLine();
         }while(opcao!="S");
+        System.out.print("\n");
     }
 
     public double calcularSomaSalCom(){

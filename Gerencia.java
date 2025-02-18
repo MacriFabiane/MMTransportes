@@ -43,10 +43,12 @@ public class Gerencia implements Serializable {
 
                 caminhoes[i] = new Caminhao(placa, chassi, false);
                 System.out.println("Caminhão cadastrado com sucesso, Chefia!");
+                System.out.print("\n");
                 break;
             }
             else if(caminhoes[4] != null){
                 System.out.println("Não há como cadastrar um novo caminhão, pouco espaço na transportadora!");
+                System.out.print("\n");
             }
         }
         
@@ -81,11 +83,14 @@ public class Gerencia implements Serializable {
                     }
                     else if (caminhoes[4].getEmUso()==true) {
                         System.out.println("Não há caminhões disponíveis na frota, para esse motorista. Não será possível a sua contratação.");
+                        System.out.print("\n");
                     }
                 }
             }
             else if (motoristas[j]!=null){
                 System.out.println("Não há vaga para um novo motorista!");
+                System.out.print("\n");
+
             }
         }
     }
@@ -170,11 +175,12 @@ public class Gerencia implements Serializable {
         return somaDespesas;
 
     }
-
+/* 
     public double calcularDifLucDes(){ //acho q não preciso disso
         //chamar soma des e soma luc aqui
         
     }
+*/
 
     public void gerarListaDespesasLucrosTotaisMotoristaPlaca(){
         System.out.println("..::Relatório de Lucros e Despesas Separados por Motorista::..");

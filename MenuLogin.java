@@ -60,12 +60,12 @@ public class MenuLogin {
     }
 
     public static Boolean validarUsuario(String nome, String senha, String tipoLogin, Gerencia gerencia){ //fazer a validadação aqui
-        if(tipoLogin == "1" && nome == gerencia.nomeGerente && senha == gerencia.senhaGerente){
+        if(tipoLogin.equals("1") && nome.equals(gerencia.nomeGerente) && senha.equals(gerencia.senhaGerente)){ 
             return true;
         }
-        if(tipoLogin == "2"){
+        if(tipoLogin.equals("2")){
             for (int i=0; i<5; i++){//vai percorrer todos os motoristas
-                if(nome == gerencia.motoristas[i].getNome() && senha == gerencia.motoristas[i].getSenhaMotorista()){
+                if(nome.equals(gerencia.motoristas[i].getNome()) && senha.equals(gerencia.motoristas[i].getSenhaMotorista())){
                     return true;
                 }
             }
