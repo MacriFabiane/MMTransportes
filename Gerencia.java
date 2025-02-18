@@ -90,13 +90,14 @@ public class Gerencia implements Serializable {
                     else if (caminhoes[4] != null && caminhoes[4].getEmUso()==true) {
                         System.out.println("Não há caminhões disponíveis na frota, para esse motorista. Não será possível a sua contratação.");
                         System.out.print("\n");
+                        break;
                     }
                 }
             }
             else if (motoristas[j]!=null){
                 System.out.println("Não há vaga para um novo motorista!");
                 System.out.print("\n");
-
+                break;
             }
         }
     }

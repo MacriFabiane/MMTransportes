@@ -84,7 +84,7 @@ public class Motorista implements Serializable{
         }
     }
 
-    public Motorista(){// naõ seria melhor botar a parada de null que nem no de cima, dataDem, prar todos os parâmetros nesse?
+ /*   public Motorista(){// naõ seria melhor botar a parada de null que nem no de cima, dataDem, prar todos os parâmetros nesse?
         
         this.viagem = new Viagem[contViag];
         this.manutencao = new Manutencao[contMan];
@@ -111,7 +111,7 @@ public class Motorista implements Serializable{
             manutencao[i] = null; // Define cada elemento como nulo
         }
     }
-
+*/
     public String getNome() {// Função para pegar o nome do motorista.
         return this.nome;
     }
