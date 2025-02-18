@@ -175,12 +175,16 @@ public class Motorista implements Serializable{
                 carregamento = teclado.nextLine();
                 System.out.println("Km Inicial: ");
                 kmIni = teclado.nextDouble();
+                teclado.nextLine(); // Limpa o buffer
                 System.out.println("Km Final: ");
                 kmFim = teclado.nextDouble();
+                teclado.nextLine(); // Limpa o buffer
                 System.out.println("Valor do Frete por Tonelada: ");
                 valorTonelada = teclado.nextDouble();
+                teclado.nextLine(); // Limpa o buffer
                 System.out.println("Peso da Carga: ");
                 pesoCarga = teclado.nextDouble();
+                teclado.nextLine(); // Limpa o buffer
                 valorComissaoViagem = calcularComissaoViagem(i);
                 valorFrete = calcularValorFrete(i);
 
@@ -243,8 +247,10 @@ public class Motorista implements Serializable{
                 nome = teclado.nextLine();
                 System.out.println("Litragem Abastecido: ");
                 litragem = teclado.nextDouble();
+                teclado.nextLine(); // Limpa o buffer
                 System.out.println("Valor Abastecido: ");
                 valor = teclado.nextDouble();
+                teclado.nextLine(); // Limpa o buffer
                 System.out.println("Data de Abastecimento: (dd/MM/yyyy)");
                 dataStr = teclado.nextLine();
 
@@ -272,6 +278,7 @@ public class Motorista implements Serializable{
                 descricao = teclado.nextLine();
                 System.out.println("Valor Abastecido: ");
                 valor = teclado.nextDouble();
+                teclado.nextLine(); // Limpa o buffer
                 System.out.println("Data da Manutenção: (dd/MM/yyyy)");
                 dataStr = teclado.nextLine();
 
@@ -296,7 +303,7 @@ public class Motorista implements Serializable{
             System.out.println(" ");
             System.out.printf("Salário Fixo: R$ ", getSalFixo());
             System.out.println(" ");
-            System.out.println("Comissão por viagem");
+            System.out.println("Comissão por viagem: ");
 
             for(i=0; i<viagem.length; i++){
                 System.out.printf("Viagem ",i, ":", getPorcenCom()*viagem[i].getComissao());

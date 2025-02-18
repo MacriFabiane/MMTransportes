@@ -83,6 +83,8 @@ public class Gerencia implements Serializable {
 
                         motoristas[j] = new Motorista(nome, idade, cnh, dataAdm, porcenCom, salFixo, senhaMotorista, placa);
                         caminhoes[i].setEmUso(true);
+                        System.out.println("Motorista cadastrado com sucesso, Chefia!");
+                        System.out.print("\n");
                         break;
                     }
                     else if (caminhoes[4] != null && caminhoes[4].getEmUso()==true) {
