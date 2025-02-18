@@ -65,8 +65,10 @@ public class MenuLogin {
         }
         if(tipoLogin.equals("2")){
             for (int i=0; i<5; i++){//vai percorrer todos os motoristas
-                if(nome.equals(gerencia.motoristas[i].getNome()) && senha.equals(gerencia.motoristas[i].getSenhaMotorista())){
-                    return true;
+                if(gerencia.motoristas[i]!=null){
+                    if(nome.equals(gerencia.motoristas[i].getNome()) && senha.equals(gerencia.motoristas[i].getSenhaMotorista())){
+                        return true;
+                    }
                 }
             }
         }

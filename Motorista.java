@@ -192,7 +192,6 @@ public class Motorista implements Serializable{
             System.out.print("\n");
         }
 
-        teclado.close();
     }
 
     public double calcularComissaoViagem(int i){
@@ -231,7 +230,6 @@ public class Motorista implements Serializable{
                     System.out.println ("Opcao invalida. Tente novamente");
             }
         }while(saida==false);
-        teclado.close();
     }
 
     public void registrarAbastecimento(){
@@ -258,7 +256,6 @@ public class Motorista implements Serializable{
             System.out.print("\n");
         }
 
-        teclado.close();
     }
 
     public void registrarManutencao(){
@@ -286,7 +283,6 @@ public class Motorista implements Serializable{
             System.out.print("\n");
         }
 
-        teclado.close();
     }
 
     public void gerarHolerite(){
