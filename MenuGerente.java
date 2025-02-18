@@ -1,8 +1,8 @@
 import java.util.Scanner;
 
 public class MenuGerente {
-    public MenuGerente(){
-        Gerencia gerencia = new Gerencia();
+    public MenuGerente(Gerencia gerencia){
+        // Gerencia gerencia = new Gerencia();
         Scanner teclado = new Scanner (System.in);
         String opcao;
         boolean saida=false;

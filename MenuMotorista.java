@@ -1,9 +1,7 @@
 import java.util.Scanner;
 
 public class MenuMotorista {
-    public MenuMotorista(){
-        Motorista motorista;
-        Gerencia gerencia = new Gerencia();
+    public MenuMotorista(Gerencia gerencia, int i){ //passar um gerencia.motorista[i]
         Scanner teclado = new Scanner (System.in);
         String opcao;
         boolean saida=false;
@@ -19,14 +17,13 @@ public class MenuMotorista {
 
             switch(opcao){
                 case "a":
-                gerencia.motoristas[i].registrarViagem();
-                    motorista.registrarViagem();
+                    gerencia.motoristas[i].registrarViagem();
                     break;
                 case "b":
-                    motorista.gerarHolerite();
+                    gerencia.motoristas[i].gerarHolerite();
                     break;
                 case "c":
-                    motorista.registrarDespesas();
+                    gerencia.motoristas[i].registrarDespesas();
                     break;
                 case "d":
                     System.out.println ("Saindo");

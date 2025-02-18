@@ -1,12 +1,13 @@
 import java.util.Scanner;
 public class MenuLogin {
-       
+    static int indiceMot =0;
     public static void main(String[] args){
         Gerencia gerencia = new Gerencia();
         Scanner teclado = new Scanner (System.in);
         String opcao;
         String user, senha;
         boolean saida=false;
+        ;
 
         do{
             System.out.println ("..::  Seja bem-vindo à:  ::..");
@@ -27,7 +28,7 @@ public class MenuLogin {
 
                     boolean validacao= validarUsuario(user, senha, opcao, gerencia);
                     if(validacao == true){  
-                        new MenuGerente(); ///ver se isso aqui funciona ou fazer o menu gerente ser um método e n um construtor
+                        new MenuGerente(gerencia); ///ver se isso aqui funciona ou fazer o menu gerente ser um método e n um construtor
                     }
                     else {
                         System.out.println("Bah! Nome ou senha incorreta! Tente novamente.");
@@ -40,8 +41,9 @@ public class MenuLogin {
                     System.out.println("Digite sua senha:");
                     senha = teclado.nextLine();
 
-                    if(validarUsuario(user, senha, opcao, gerencia) == true){  
-                        new MenuMotorista(); ///ver como eu chamo isso aqui
+                    validacao = validarUsuario(user, senha, opcao, gerencia);
+                    if(validacao == true){  
+                        new MenuMotorista(gerencia, indiceMot); ///ver como eu chamo isso aqui
                     }
                     else {
                         System.out.println("Bah! Nome ou senha incorreta! Tente novamente.");
@@ -64,8 +66,9 @@ public class MenuLogin {
             return true;
         }
         if(tipoLogin.equals("2")){
-            for (int i=0; i<5; i++){//vai percorrer todos os motoristas
+            for (int i=0; i<gerencia.motoristas.length; i++){//vai percorrer todos os motoristas
                 if(gerencia.motoristas[i]!=null){
+                    indiceMot = i;
                     if(nome.equals(gerencia.motoristas[i].getNome()) && senha.equals(gerencia.motoristas[i].getSenhaMotorista())){
                         return true;
                     }

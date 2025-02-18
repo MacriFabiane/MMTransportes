@@ -44,7 +44,7 @@ public class Gerencia implements Serializable {
                 caminhoes[i] = new Caminhao(placa, chassi, false);
                 System.out.println("Caminhão cadastrado com sucesso, Chefia!");
                 System.out.print("\n");
-                break;
+                return;
             }
             else if(caminhoes[4] != null){
                 System.out.println("Não há como cadastrar um novo caminhão, pouco espaço na transportadora!");
@@ -83,27 +83,26 @@ public class Gerencia implements Serializable {
 
                         motoristas[j] = new Motorista(nome, idade, cnh, dataAdm, porcenCom, salFixo, senhaMotorista, placa);
                         caminhoes[i].setEmUso(true);
+                        System.out.print("\n");
                         System.out.println("Motorista cadastrado com sucesso, Chefia!");
                         System.out.print("\n");
-                        break;
+                        return;
                     }
                     else if (caminhoes[4] != null && caminhoes[4].getEmUso()==true) {
                         System.out.println("Não há caminhões disponíveis na frota, para esse motorista. Não será possível a sua contratação.");
                         System.out.print("\n");
-                        break;
                     }
                 }
             }
             else if (motoristas[j]!=null){
                 System.out.println("Não há vaga para um novo motorista!");
                 System.out.print("\n");
-                break;
             }
         }
     }
 
     public double calcularTotalSalarios(){ //total salario de todos os motoristas (salario fixo mais as comissões das viagens do mês)
-        
+        somaSalarios=0;
         for (int i=0; i<motoristas.length; i++){
 
             if(motoristas[i] != null){//se o motorista existir
@@ -118,16 +117,25 @@ public class Gerencia implements Serializable {
     }
 
     public void gerarListaMotoristaSalario(){
-        System.out.println("..::Folha de Pagamentos::..");
-        System.out.println("Motorista:                   Salário: ");
-        for(int i=0; i<5; i++){
-            System.out.printf("%s          R$: %.2f%n", motoristas[i], calcularTotalSalarioMotorista(i));
-        }
-        System.out.printf("Total gasto em salários: R$: %.2f%n", calcularTotalSalarios());
+        Scanner teclado = new Scanner(System.in);
+        String opcao = "N";
+        do{
+            System.out.println("..::Folha de Pagamentos::..");
+            System.out.println("Motorista:                   Salário: ");
+            for(int i=0; i<motoristas.length; i++){
+                if(motoristas[i]!=null){
+                    System.out.printf("%s                R$: %.2f%n", motoristas[i].getNome(), calcularTotalSalarioMotorista(i));
+                }
+            }
+            System.out.printf("Total gasto em salários: R$: %.2f%n", calcularTotalSalarios());
+            System.out.print("\n");
+            System.out.println("Deseja sair da página? S - Sim  /  N - Não ");
+            opcao = teclado.nextLine();
+        }while(!opcao.equals("S"));
     }
 
     public double calcularTotalSalarioMotorista(int i){ //total salario do motorista (salario fixo mais as comissões das viagens do mês)
-        
+        somaSalarios=0;
             if(motoristas[i] != null){//se o motorista existir
                 somaSalarios += motoristas[i].getSalFixo(); //vai ter que somar tbm a comissão de cada viagem
                 for(int j=0; j<15; j++){
@@ -139,15 +147,23 @@ public class Gerencia implements Serializable {
     }
 
     public void gerearRelatorioLeDTotais(){ //gera relatorio de lucros e despesas totais do mes //SEM DATA AINDA
-        double lucrosTotais = 0.0;
-        double despesasTotais = 0.0;
-        for(int i=0; i<5; i++){
-            lucrosTotais += somarLucros(i);
-            despesasTotais += somarDespesas(i);
-        }
-        System.out.println("..::Relatório de Lucros e Despesas Totais::..");
-        System.out.printf("Lucros = R$ %.2f%n", lucrosTotais);
-        System.out.printf("Despesas = R$ %.2f%n", despesasTotais);
+        Scanner teclado = new Scanner(System.in);
+        String opcao = "N";
+        do{
+            double lucrosTotais = 0.0;
+            double despesasTotais = 0.0;
+            for(int i=0; i<5; i++){
+                lucrosTotais += somarLucros(i);
+                despesasTotais += somarDespesas(i);
+            }
+            System.out.println("..::Relatório de Lucros e Despesas Totais::..");
+            System.out.printf("Lucros = R$ %.2f%n", lucrosTotais);
+            System.out.printf("Despesas = R$ %.2f%n", despesasTotais);
+            System.out.print("\n");
+            System.out.println(" ");
+            System.out.println("Deseja sair da página? S - Sim  /  N - Não ");
+            opcao = teclado.nextLine();
+        }while(!opcao.equals("S"));
 
     }
     
@@ -182,19 +198,23 @@ public class Gerencia implements Serializable {
         return somaDespesas;
 
     }
-/* 
-    public double calcularDifLucDes(){ //acho q não preciso disso
-        //chamar soma des e soma luc aqui
-        
-    }
-*/
 
     public void gerarListaDespesasLucrosTotaisMotoristaPlaca(){
-        System.out.println("..::Relatório de Lucros e Despesas Separados por Motorista::..");
-        System.out.println("Motorista:        Placa:         Despesas:        Lucros:");
-        for(int i=0; i<5; i++){
-            System.out.printf("%s       %s        R$: %.2f       R$: %.2f%n", motoristas[i], motoristas[i].getPlacaMot(), somarDespesas(i), somarLucros(i));
-        }
-        System.out.printf("Total gasto em salários: R$: %.2f%n", calcularTotalSalarios());
+        Scanner teclado = new Scanner(System.in);
+        String opcao = "N";
+        do{
+            System.out.println("..::Relatório de Lucros e Despesas Separados por Motorista::..");
+            System.out.println("Motorista:        Placa:         Despesas:        Lucros:");
+            for(int i=0; i<5; i++){
+                if(motoristas[i]!=null){
+                    System.out.printf("%s       %s        R$: %.2f       R$: %.2f%n", motoristas[i].getNome(), motoristas[i].getPlacaMot(), somarDespesas(i), somarLucros(i));
+                }
+            }
+            System.out.printf("Total gasto em salários: R$: %.2f%n", calcularTotalSalarios());
+            System.out.print("\n");      System.out.println(" ");
+            System.out.println("Deseja sair da página? S - Sim  /  N - Não ");
+            opcao = teclado.nextLine();
+        }while(!opcao.equals("S"));
+
     }
 }
